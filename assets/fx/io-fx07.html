@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>io-fx07</title>
+  <style>
+    html, body { background: #1B1D1F;background-image:linear-gradient(to top,#141626 0%,#040319 80%); margin: 0; padding:0;height: 100vh;width: 100%;}
+    .banner-wrap,#stage {width:100%;height:100%;}
+    #stage {overflow:hidden;position:relative;z-index:0;}
+    #stage .space {width:3840px;height:100%;position:absolute;top:0;left:0;z-index:0;background:url(./images/space.png) repeat-x;}
+    #stage .mountains {width:100%;height:17.78125em;overflow:hidden;position:absolute;left:0;bottom:0;z-index:1;opacity:0;-webkit-transition:opacity 0.2s linear 0s;-moz-transition:opacity 0.2s linear 0s;transition:opacity 0.2s linear 0s;-webkit-transform-origin:center top;-moz-transform-origin:center top;transform-origin:center top;}
+    #stage .mountain {width:240em;position:absolute;left:0;bottom:0;}
+    #stage .mountain-1 {height:10.5em;z-index:3;background:url(./images/mountain-1.png) repeat-x;background-size:auto 50%;background-position:0 bottom;}
+    #stage .mountain-2 {height:12em;z-index:2;background:url(./images/mountain-2.png) repeat-x;background-size:auto 50%;background-position:0 bottom;}
+    #stage .mountain-3 {height:17.78125em;z-index:1;background:url(./images/mountain-3.png) repeat-x;background-size:auto 30%;background-position:0 bottom;}
+    #stage .bear-wrapper {width:6.25em;height:3.125em;position:absolute;margin-left:-3.125em;left:50%;bottom:40px;z-index:999;}
+    #stage .bear {width:3.12em;height:1.625em;position:absolute;margin-left:-1.5625em;left:-4%;bottom:20px;z-index:999;background:url("./images/bear.png") 0 0 no-repeat;background-size:25em 100%;opacity:0;}
+    .scenes-ready #stage .space {-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-animation:moving 450s linear 0.8s infinite normal none;-moz-animation:moving 450s linear 0.8s infinite normal none;animation:moving 450s linear 0.8s infinite normal none;}
+    .scenes-ready #stage .mountains {opacity:1;-webkit-animation:mountains-in 0.8s ease-out 0s 1 normal forwards;-moz-animation:mountains-in 0.8s ease-out 0s 1 normal forwards;animation:mountains-in 0.8s ease-out 0s 1 normal forwards;}
+    .scenes-ready #stage .mountain-1 {-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-animation:moving 100s linear 0.8s infinite normal none;-moz-animation:moving 100s linear 0.8s infinite normal none;animation:moving 100s linear 0.8s infinite normal none;}
+    .scenes-ready #stage .mountain-2 {-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-animation:moving 160s linear 0.8s infinite normal none;-moz-animation:moving 160s linear 0.8s infinite normal none;animation:moving 160s linear 0.8s infinite normal none;}
+    .scenes-ready #stage .mountain-3 {-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);transform:translate3d(0,0,0);-webkit-animation:moving 360s linear 0.8s infinite normal none;-moz-animation:moving 360s linear 0.8s infinite normal none;animation:moving 360s linear 0.8s infinite normal none;}
+    .scenes-ready #stage .bear {opacity:1;-webkit-transition:opacity 0.4s linear 0.6s;-moz-transition:opacity 0.4s linear 0.6s;transition:opacity 0.4s linear 0.6s;}
+    .scenes-ready #stage .bear {-webkit-animation:bear-run-in 3.6s step-end 0.6s 1 normal forwards,bear-run 0.8s steps(8) 4.2s infinite normal forwards;-moz-animation:bear-run-in 3.6s step-end 0.6s 1 normal forwards,bear-run 0.8s steps(8) 4.2s infinite normal forwards;animation:bear-run-in 3.6s step-end 0.6s 1 normal forwards,bear-run 0.8s steps(8) 4.2s infinite normal forwards;}
+    .scenes-ready #stage .bear.reset{left:50%;opacity:1;-webkit-animation:none 0s linear 0s infinite normal none;-moz-animation:none 0s linear 0s infinite normal none;animation:none 0s linear 0s infinite normal none;}
+    .scenes-ready #stage .bear.running{left:50%;-webkit-animation:bear-run 0.8s steps(8) 0s infinite normal none;-moz-animation:bear-run 0.8s steps(8) 0s infinite normal none;animation:bear-run 0.8s steps(8) 0s infinite normal none;}
+    @-webkit-keyframes mountains-in {0% {-webkit-transform:scale(1.5);}
+    100% {-webkit-transform:scale(1);}
+    }
+    @-moz-keyframes mountains-in {0% {-moz-transform:scale(1.5);}
+    100% {-moz-transform:scale(1);}
+    }
+    @keyframes mountains-in {0% {transform:scale(1.5);}
+    100% {transform:scale(1);}
+    }
+    @-webkit-keyframes moving {0% {-webkit-transform:translate3d(0,0,0);}
+    100% {-webkit-transform:translate3d(-50%,0,0);}
+    }
+    @-moz-keyframes moving {0% {-moz-transform:translate3d(0,0,0);}
+    100% {-moz-transform:translate3d(-50%,0,0);}
+    }
+    @keyframes moving {0% {transform:translate3d(0,0,0);}
+    100% {transform:translate3d(-50%,0,0);}
+    }
+    @-webkit-keyframes bear-run {0% {background-position:0 0;}
+    100% {background-position:-25em 0;}
+    }
+    @-moz-keyframes bear-run {0% {background-position:0 0;}
+    100% {background-position:-25em 0;}
+    }
+    @keyframes bear-run {0% {background-position:0 0;}
+    100% {background-position:-25em 0;}
+    }
+    @-webkit-keyframes bear-run-in {0% {background-position:0em 0;left:-4%;}
+    1.38888889% {background-position:-3.125em 0;left:-2.25%;}
+    2.77777778% {background-position:-6.25em 0;left:-0.5%;}
+    4.16666667% {background-position:-9.375em 0;left:1.25%;}
+    5.55555556% {background-position:-12.5em 0;left:3%;}
+    6.94444444% {background-position:-15.625em 0;left:4.75%;}
+    8.33333333% {background-position:-18.75em 0;left:6.5%;}
+    9.72222222% {background-position:-21.875em 0;left:8.25%;}
+    11.11111111% {background-position:-25em 0;left:10%;}
+    11.11111111% {background-position:0em 0;left:10%;}
+    12.77777778% {background-position:-3.125em 0;left:11.5%;}
+    14.44444444% {background-position:-6.25em 0;left:13%;}
+    16.11111111% {background-position:-9.375em 0;left:14.5%;}
+    17.77777778% {background-position:-12.5em 0;left:16%;}
+    19.44444444% {background-position:-15.625em 0;left:17.5%;}
+    21.11111111% {background-position:-18.75em 0;left:19%;}
+    22.77777778% {background-position:-21.875em 0;left:20.5%;}
+    24.44444444% {background-position:-25em 0;left:22%;}
+    24.44444444% {background-position:0em 0;left:22%;}
+    26.38888889% {background-position:-3.125em 0;left:23.25%;}
+    28.33333333% {background-position:-6.25em 0;left:24.5%;}
+    30.27777778% {background-position:-9.375em 0;left:25.75%;}
+    32.22222222% {background-position:-12.5em 0;left:27%;}
+    34.16666667% {background-position:-15.625em 0;left:28.25%;}
+    36.11111111% {background-position:-18.75em 0;left:29.5%;}
+    38.05555556% {background-position:-21.875em 0;left:30.75%;}
+    40% {background-position:-25em 0;left:32%;}
+    40% {background-position:0em 0;left:32%;}
+    42.22222222% {background-position:-3.125em 0;left:33%;}
+    44.44444444% {background-position:-6.25em 0;left:34%;}
+    46.66666667% {background-position:-9.375em 0;left:35%;}
+    48.88888889% {background-position:-12.5em 0;left:36%;}
+    51.11111111% {background-position:-15.625em 0;left:37%;}
+    53.33333333% {background-position:-18.75em 0;left:38%;}
+    55.55555556% {background-position:-21.875em 0;left:39%;}
+    57.77777778% {background-position:-25em 0;left:40%;}
+    57.77777778% {background-position:0em 0;left:40%;}
+    60.27777778% {background-position:-3.125em 0;left:40.75%;}
+    62.77777778% {background-position:-6.25em 0;left:41.5%;}
+    65.27777778% {background-position:-9.375em 0;left:42.25%;}
+    67.77777778% {background-position:-12.5em 0;left:43%;}
+    70.27777778% {background-position:-15.625em 0;left:43.75%;}
+    72.77777778% {background-position:-18.75em 0;left:44.5%;}
+    75.27777778% {background-position:-21.875em 0;left:45.25%;}
+    77.77777778% {background-position:-25em 0;left:46%;}
+    77.77777778% {background-position:0em 0;left:46%;}
+    80.55555556% {background-position:-3.125em 0;left:46.5%;}
+    83.33333333% {background-position:-6.25em 0;left:47%;}
+    86.11111111% {background-position:-9.375em 0;left:47.5%;}
+    88.88888889% {background-position:-12.5em 0;left:48%;}
+    91.66666667% {background-position:-15.625em 0;left:48.5%;}
+    94.44444444% {background-position:-18.75em 0;left:49%;}
+    97.22222222% {background-position:-21.875em 0;left:49.5%;}
+    100% {background-position:-25em 0;left:50%;}
+    }
+    @-moz-keyframes bear-run-in {0% {background-position:0em 0;left:-4%;}
+    1.38888889% {background-position:-3.125em 0;left:-2.25%;}
+    2.77777778% {background-position:-6.25em 0;left:-0.5%;}
+    4.16666667% {background-position:-9.375em 0;left:1.25%;}
+    5.55555556% {background-position:-12.5em 0;left:3%;}
+    6.94444444% {background-position:-15.625em 0;left:4.75%;}
+    8.33333333% {background-position:-18.75em 0;left:6.5%;}
+    9.72222222% {background-position:-21.875em 0;left:8.25%;}
+    11.11111111% {background-position:-25em 0;left:10%;}
+    11.11111111% {background-position:0em 0;left:10%;}
+    12.77777778% {background-position:-3.125em 0;left:11.5%;}
+    14.44444444% {background-position:-6.25em 0;left:13%;}
+    16.11111111% {background-position:-9.375em 0;left:14.5%;}
+    17.77777778% {background-position:-12.5em 0;left:16%;}
+    19.44444444% {background-position:-15.625em 0;left:17.5%;}
+    21.11111111% {background-position:-18.75em 0;left:19%;}
+    22.77777778% {background-position:-21.875em 0;left:20.5%;}
+    24.44444444% {background-position:-25em 0;left:22%;}
+    24.44444444% {background-position:0em 0;left:22%;}
+    26.38888889% {background-position:-3.125em 0;left:23.25%;}
+    28.33333333% {background-position:-6.25em 0;left:24.5%;}
+    30.27777778% {background-position:-9.375em 0;left:25.75%;}
+    32.22222222% {background-position:-12.5em 0;left:27%;}
+    34.16666667% {background-position:-15.625em 0;left:28.25%;}
+    36.11111111% {background-position:-18.75em 0;left:29.5%;}
+    38.05555556% {background-position:-21.875em 0;left:30.75%;}
+    40% {background-position:-25em 0;left:32%;}
+    40% {background-position:0em 0;left:32%;}
+    42.22222222% {background-position:-3.125em 0;left:33%;}
+    44.44444444% {background-position:-6.25em 0;left:34%;}
+    46.66666667% {background-position:-9.375em 0;left:35%;}
+    48.88888889% {background-position:-12.5em 0;left:36%;}
+    51.11111111% {background-position:-15.625em 0;left:37%;}
+    53.33333333% {background-position:-18.75em 0;left:38%;}
+    55.55555556% {background-position:-21.875em 0;left:39%;}
+    57.77777778% {background-position:-25em 0;left:40%;}
+    57.77777778% {background-position:0em 0;left:40%;}
+    60.27777778% {background-position:-3.125em 0;left:40.75%;}
+    62.77777778% {background-position:-6.25em 0;left:41.5%;}
+    65.27777778% {background-position:-9.375em 0;left:42.25%;}
+    67.77777778% {background-position:-12.5em 0;left:43%;}
+    70.27777778% {background-position:-15.625em 0;left:43.75%;}
+    72.77777778% {background-position:-18.75em 0;left:44.5%;}
+    75.27777778% {background-position:-21.875em 0;left:45.25%;}
+    77.77777778% {background-position:-25em 0;left:46%;}
+    77.77777778% {background-position:0em 0;left:46%;}
+    80.55555556% {background-position:-3.125em 0;left:46.5%;}
+    83.33333333% {background-position:-6.25em 0;left:47%;}
+    86.11111111% {background-position:-9.375em 0;left:47.5%;}
+    88.88888889% {background-position:-12.5em 0;left:48%;}
+    91.66666667% {background-position:-15.625em 0;left:48.5%;}
+    94.44444444% {background-position:-18.75em 0;left:49%;}
+    97.22222222% {background-position:-21.875em 0;left:49.5%;}
+    100% {background-position:-25em 0;left:50%;}
+    }
+    @keyframes bear-run-in {0% {background-position:0em 0;left:-4%;}
+    1.38888889% {background-position:-3.125em 0;left:-2.25%;}
+    2.77777778% {background-position:-6.25em 0;left:-0.5%;}
+    4.16666667% {background-position:-9.375em 0;left:1.25%;}
+    5.55555556% {background-position:-12.5em 0;left:3%;}
+    6.94444444% {background-position:-15.625em 0;left:4.75%;}
+    8.33333333% {background-position:-18.75em 0;left:6.5%;}
+    9.72222222% {background-position:-21.875em 0;left:8.25%;}
+    11.11111111% {background-position:-25em 0;left:10%;}
+    11.11111111% {background-position:0em 0;left:10%;}
+    12.77777778% {background-position:-3.125em 0;left:11.5%;}
+    14.44444444% {background-position:-6.25em 0;left:13%;}
+    16.11111111% {background-position:-9.375em 0;left:14.5%;}
+    17.77777778% {background-position:-12.5em 0;left:16%;}
+    19.44444444% {background-position:-15.625em 0;left:17.5%;}
+    21.11111111% {background-position:-18.75em 0;left:19%;}
+    22.77777778% {background-position:-21.875em 0;left:20.5%;}
+    24.44444444% {background-position:-25em 0;left:22%;}
+    24.44444444% {background-position:0em 0;left:22%;}
+    26.38888889% {background-position:-3.125em 0;left:23.25%;}
+    28.33333333% {background-position:-6.25em 0;left:24.5%;}
+    30.27777778% {background-position:-9.375em 0;left:25.75%;}
+    32.22222222% {background-position:-12.5em 0;left:27%;}
+    34.16666667% {background-position:-15.625em 0;left:28.25%;}
+    36.11111111% {background-position:-18.75em 0;left:29.5%;}
+    38.05555556% {background-position:-21.875em 0;left:30.75%;}
+    40% {background-position:-25em 0;left:32%;}
+    40% {background-position:0em 0;left:32%;}
+    42.22222222% {background-position:-3.125em 0;left:33%;}
+    44.44444444% {background-position:-6.25em 0;left:34%;}
+    46.66666667% {background-position:-9.375em 0;left:35%;}
+    48.88888889% {background-position:-12.5em 0;left:36%;}
+    51.11111111% {background-position:-15.625em 0;left:37%;}
+    53.33333333% {background-position:-18.75em 0;left:38%;}
+    55.55555556% {background-position:-21.875em 0;left:39%;}
+    57.77777778% {background-position:-25em 0;left:40%;}
+    57.77777778% {background-position:0em 0;left:40%;}
+    60.27777778% {background-position:-3.125em 0;left:40.75%;}
+    62.77777778% {background-position:-6.25em 0;left:41.5%;}
+    65.27777778% {background-position:-9.375em 0;left:42.25%;}
+    67.77777778% {background-position:-12.5em 0;left:43%;}
+    70.27777778% {background-position:-15.625em 0;left:43.75%;}
+    72.77777778% {background-position:-18.75em 0;left:44.5%;}
+    75.27777778% {background-position:-21.875em 0;left:45.25%;}
+    77.77777778% {background-position:-25em 0;left:46%;}
+    77.77777778% {background-position:0em 0;left:46%;}
+    80.55555556% {background-position:-3.125em 0;left:46.5%;}
+    83.33333333% {background-position:-6.25em 0;left:47%;}
+    86.11111111% {background-position:-9.375em 0;left:47.5%;}
+    88.88888889% {background-position:-12.5em 0;left:48%;}
+    91.66666667% {background-position:-15.625em 0;left:48.5%;}
+    94.44444444% {background-position:-18.75em 0;left:49%;}
+    97.22222222% {background-position:-21.875em 0;left:49.5%;}
+    100% {background-position:-25em 0;left:50%;}
+    }
+  </style>
+</head>
+<body>
+
+<div class="banner-wrap scenes-ready">
+  <div id="stage">
+    <div class="space"></div>
+    <div class="mountains">
+      <div class="mountain mountain-1"></div>
+      <div class="mountain mountain-2"></div>
+      <div class="mountain mountain-3"></div>
+    </div>
+    <div class="bear"></div>
+  </div>
+</div>
+
+
+</body>
+</html>

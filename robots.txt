@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.52nav.icu/sitemap.xml
