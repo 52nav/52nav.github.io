@@ -125,6 +125,10 @@ p{color:#1d232b;margin:0;white-space:normal;word-break:break-all}
 .text-height-lg{line-height:1.6!important}
 .text-height-xl{line-height:2!important}
 
+html {
+    scroll-padding-top: 4rem;
+    scroll-behavior: smooth;
+}
 
 
 .box300-250 {
