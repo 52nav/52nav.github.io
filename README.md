@@ -46,6 +46,13 @@
 
 官网：[点我进入](https://colacloud.net/index.php#/register?code=StdFoxdl)
 
+
+## 大迅云
+
+2G 流量+免费 7 天。拥有美国、香港、日本、韩国、台湾、德国等地区节点。
+
+官网：[点我进入](https://daxun.club/#/register?code=wERl5qKd)
+
 ## 奶茶 Cloud
 
 自研隧道，全部中转或专线，流媒体解锁。9 元包月 2000G。
@@ -58,11 +65,11 @@
 
 官网：[点我进入](https://fxyjs.fun/#/register?code=19l6Lltq)
 
-## 十元店
+## 百变小樱
 
-全中转，流媒体解锁 付费最低 9.9/月/500GB 流量
+10 G 流量+免费 1 天。每日签到可免费用签到流量。
 
-官网：[点我进入](https://shiyuandian.org/#/register?code=5Ai9kFse)
+官网: [点我进入](https://bbxy.shop/auth/register?code=28Vj)
 
 ## 可可云
 
@@ -88,11 +95,7 @@ SS 协议 最低 100G 流量/20 元/月
 
 官网: [点我进入](https://speedcat-aff.com/auth/register?code=u0HG)
 
-## 大迅云
 
-2G 流量+免费 7 天。拥有美国、香港、日本、韩国、台湾、德国等地区节点。
-
-官网：[点我进入](https://daxun.club/#/register?code=wERl5qKd)
 
 ## 西红柿
 
@@ -130,11 +133,6 @@ SS 协议 最低 100G 流量/20 元/月
 
 官网：[点我进入](https://jike251.xyz/auth/register?code=y305)
 
-## 百变小樱
-
-10 G 流量+免费 1 天。每日签到可免费用签到流量。
-
-官网: [点我进入](https://bbxy.shop/auth/register?code=28Vj)
 
 ## 奈飞账号
 
