@@ -327,3 +327,41 @@ footer  ul {
 footer ul> li {
     margin-right: 10px; /* 可选，用于设置项之间的间距 */
 }
+
+.accordion table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+}
+.accordion table thead td, .accordion table thead th {
+    border-bottom-width: 2px;
+}
+.accordion table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.accordion table td, table th {
+    border: 1px solid #dee2e6;
+  padding: 0.75rem;
+    vertical-align: top;
+}
+.accordion table caption{
+    text-align: center;
+}
+
+blockquote {
+    font-size: 1rem;
+    border-left: .2rem solid #0888f1;
+    margin: 1rem 0;
+    padding: .15rem 0 0 1rem;
+    overflow-wrap: break-word;
+    background-color: rgba(0,0,0,.05);
+}
+  
+  
+blockquote {
+    border-left: 3px solid #0888f1;
+    border-top: 1px solid #0888f1;
+}
