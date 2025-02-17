@@ -1,3 +1,4 @@
-User-agent: *
-Allow: /
+User-agent: Googlebot
+Disallow: /
+
 Sitemap: https://52nav.github.io/sitemap.xml
